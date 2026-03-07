@@ -1,12 +1,19 @@
 import * as utils from '~/utils';
 
 /**
- * Determine the length of an array.
- * @param {any[]} collection Array whose elements to be counted.
- * @return {number|false}
+ * Returns the length of an array.
+ * If the value is not an array, returns `false`.
+ * @param {any[]} collection - The array whose length to determine.
+ * @return {number|false} The number of elements in the array, or `false` if the value is not an array.
  * @example
- * // results in: 2
- * hbs.compile("{{count collection}}")({"collection":["foo","bar"]});
+ * // results in: 3
+ * hbs.compile("{{count collection}}")({"collection": ["apple", "banana", "cherry"]});
+ *
+ * // results in: 0
+ * hbs.compile("{{count collection}}")({"collection": []});
+ *
+ * // results in: false
+ * hbs.compile("{{count collection}}")({"collection": "not an array"});
  */
 export default (collection: any[]): number|false => {
   if (!utils.isArray(collection))

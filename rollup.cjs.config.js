@@ -1,7 +1,12 @@
+/**
+ * Rollup configuration for CommonJS build.
+ * Output: dist/build.common.js (for Node.js require()).
+ */
 import common from './rollup.common.config.js';
 import alias from '@rollup/plugin-alias';
-import pkg from './package.json';
+import pkg from './package.json' with { type: 'json' };
 
+// Alias dependencies to their Node.js CJS bundles.
 common.plugins.unshift(
   alias({
     entries: {
@@ -10,10 +15,12 @@ common.plugins.unshift(
     }
   })
 );
+
 common.output = [
   {
     format: 'cjs',
     file: pkg.main
   }
 ];
-export default  common;
+
+export default common;

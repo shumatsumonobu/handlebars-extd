@@ -1,4 +1,8 @@
+# Source and config (not needed in published package)
 node_modules/
 src/
 rollup.config.js
 tsconfig.json
+
+# AI assistant
+.claude/

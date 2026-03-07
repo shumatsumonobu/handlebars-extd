@@ -1,9 +1,9 @@
 /**
- * Returns true if the given str matches the given regex.
- * @param {string} val The string against which to match the regular expression.
- * @param {string} pattern The text of the regular expression.
- * @param {string} flags? Regular expression flags, such as global and case-insensitive searches. The default is none (undefined).
- * @return {boolean} true if there is a match between the regular expression and the string str. Otherwise, false.
+ * Tests whether a string matches a regular expression pattern.
+ * @param {string} val - The string to test against the regular expression.
+ * @param {string} pattern - The regular expression pattern.
+ * @param {string} [flags] - Optional regex flags (e.g., `'i'` for case-insensitive, `'g'` for global).
+ * @return {boolean} `true` if the string matches the pattern, `false` otherwise.
  * @example
  * // results in: true
  * hbs.compile("{{regexMatch 'foobar' 'foo'}}")();
@@ -11,15 +11,16 @@
  * // results in: false
  * hbs.compile("{{regexMatch 'bar' 'foo'}}")();
  *
- * // results in: false
+ * // results in: false (exact match required)
  * hbs.compile("{{regexMatch 'foobar' '^foo$'}}")();
  *
- * // results in: true
+ * // results in: true (case-insensitive flag)
  * hbs.compile("{{regexMatch 'Visit Here' 'here' 'i'}}")();
  *
- * // results in: false
+ * // results in: false (case-sensitive by default)
  * hbs.compile("{{regexMatch 'Visit Here' 'here'}}")();
  *
+ * // Can be used with {{#if}} blocks:
  * // results in: Match
  * hbs.compile("{{#if (regexMatch 'foobar' 'foo')}}Match{{/if}}")();
  */

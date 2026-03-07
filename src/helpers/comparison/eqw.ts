@@ -1,11 +1,15 @@
 /**
- * Determine whether or not two values are equal (==) i.e weak checking.
- * @param {any} val1 First value to be compared with second.
- * @param {any} val2 Second value to be compared with first.
- * @return {boolean}
+ * Checks whether two values are loosely equal (`==`).
+ * Unlike `eq`, this performs type coercion before comparison.
+ * @param {any} val1 - The first value.
+ * @param {any} val2 - The second value.
+ * @return {boolean} `true` if both values are loosely equal, `false` otherwise.
  * @example
- * // results in: true
- * hbs.compile("{{eqw a b}}")({"a":"3","b":3});
+ * // results in: true (loose comparison: type coercion applied)
+ * hbs.compile("{{eqw a b}}")({"a": "3", "b": 3});
+ *
+ * // results in: false
+ * hbs.compile("{{eqw a b}}")({"a": "hello", "b": "world"});
  */
 export default (val1: any, val2: any): boolean => {
   return val1 == val2;

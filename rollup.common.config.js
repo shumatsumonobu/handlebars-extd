@@ -1,33 +1,22 @@
+/**
+ * Shared Rollup configuration.
+ * Used as a base by rollup.esm-and-umd.config.js and rollup.cjs.config.js.
+ */
 import typescript from 'rollup-plugin-typescript2';
 import terser from '@rollup/plugin-terser';
 import json from '@rollup/plugin-json';
 import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
-// import alias from '@rollup/plugin-alias';
-// import pkg from './package.json';
-// import replace from '@rollup/plugin-replace';
 
-// Determine whether it is a production environment
+// Check if building for production (minification, etc.).
 const isProduction = () => {
   return process.env.NODE_ENV === 'production';
 }
 
 export default {
-  // external: Object.keys(pkg['dependencies'] || []),
   input: './src/index.ts',
   plugins: [
-    // alias({
-    //   entries: {
-    //     'sprintf-js': 'sprintf-js/dist/sprintf.min.js'
-    //   }
-    // }),
-    // replace({
-    //   // When you "each" an object in handlebars.js, "global.Symbol" is an undefined error because there is no reference to the "window" object in "global".So replace global with window.
-    //   include: '**/handlebars.*',
-    //   values: {
-    //     'global.Symbol': 'window.Symbol'
-    //   }
-    // }),
+    // Compile TypeScript and generate declaration files.
     typescript({
       tsconfigDefaults: {compilerOptions: {}},
       tsconfig: 'tsconfig.json',
@@ -35,30 +24,25 @@ export default {
       useTsconfigDeclarationDir: true,
       objectHashIgnoreUnknownHack: true
     }),
+
+    // Minify output in production builds.
     isProduction() && terser(),
+
+    // Allow importing JSON files.
     json(),
+
+    // Convert CommonJS modules to ES modules for bundling.
     commonjs(),
+
+    // Resolve bare module imports from node_modules.
     nodeResolve({
       mainFields: ['module', 'main']
     })
   ],
-  output: [
-    // {
-    //   format: 'esm',
-    //   file: pkg.module
-    // },
-    // {
-    //   format: 'cjs',
-    //   file: pkg.main
-    // },
-    // {
-    //   format: 'umd',
-    //   file: pkg.browser,
-    //   name: pkg.name
-    //     .replace(/^.*\/|\.js$/g, '')
-    //     .replace(/([-_][a-z])/g, (group) => group.toUpperCase().replace('-', '').replace('_', ''))
-    // }
-  ],
+
+  // Output targets are defined per-config (ESM/UMD, CJS).
+  output: [],
+
   watch: {
     exclude: 'node_modules/**',
     include: 'src/**'

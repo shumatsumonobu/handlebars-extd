@@ -1,11 +1,17 @@
 /**
- * Check for less than or equals condition (a <= b).
- * @param {any} val1 First value to be compared with second.
- * @param {any} val2 Second value to be compared with first.
- * @return {boolean}
+ * Checks whether the first value is less than or equal to the second (`a <= b`).
+ * @param {any} val1 - The first value.
+ * @param {any} val2 - The second value.
+ * @return {boolean} `true` if `val1 <= val2`, `false` otherwise.
  * @example
+ * // results in: true
+ * hbs.compile("{{lte a b}}")({"a": 2, "b": 3});
+ *
+ * // results in: true
+ * hbs.compile("{{lte a b}}")({"a": 3, "b": 3});
+ *
  * // results in: false
- * hbs.compile("{{lte a '<=' b}}")({"a":2,"b":3});
+ * hbs.compile("{{lte a b}}")({"a": 5, "b": 3});
  */
 export default (val1: any, val2: any): boolean => {
   return val1 <= val2;

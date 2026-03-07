@@ -1,64 +1,64 @@
 /**
- * Check if param is a function.
- * @param {any} thing
- * @return {boolean}
+ * Checks whether the given value is a function.
+ * @param {unknown} value - The value to check.
+ * @return {boolean} `true` if the value is a function, `false` otherwise.
  */
-function isFunction(thing: any): boolean {
-  return typeof thing === 'function';
+function isFunction(value: unknown): value is Function {
+  return typeof value === 'function';
 }
 
 /**
- * Check if param is a string.
- * @param {any} thing
- * @return {boolean}
+ * Checks whether the given value is a string.
+ * @param {unknown} value - The value to check.
+ * @return {boolean} `true` if the value is a string, `false` otherwise.
  */
-function isString(thing: any): boolean {
-  return typeof thing === 'string';
+function isString(value: unknown): value is string {
+  return typeof value === 'string';
 }
 
 /**
- * Check if param is undefined.
- * @param {any} thing
- * @return {boolean}
+ * Checks whether the given value is undefined.
+ * @param {unknown} value - The value to check.
+ * @return {boolean} `true` if the value is undefined, `false` otherwise.
  */
-function isUndefined(thing: any): boolean {
-  return typeof thing === 'undefined';
+function isUndefined(value: unknown): value is undefined {
+  return typeof value === 'undefined';
 }
 
 /**
- * Check if param is not undefined.
- * @param {any} thing
- * @return {boolean}
+ * Checks whether the given value is defined (not undefined).
+ * @param {unknown} value - The value to check.
+ * @return {boolean} `true` if the value is not undefined, `false` otherwise.
  */
-function isDefined(thing: any): boolean {
-  return !isUndefined(thing);
+function isDefined(value: unknown): boolean {
+  return !isUndefined(value);
 }
 
 /**
- * Check if param is an object.
- * @param {any} thing
- * @return {boolean}
+ * Checks whether the given value is a plain object (not null, not an array).
+ * @param {unknown} value - The value to check.
+ * @return {boolean} `true` if the value is a plain object, `false` otherwise.
  */
-function isObject(thing: any): boolean {
-  return typeof thing === 'object' && thing !== null && !Array.isArray(thing);
+function isObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 /**
- * Check if param is an array.
- * @param {any} thing
- * @return {boolean}
+ * Checks whether the given value is an array.
+ * @param {unknown} value - The value to check.
+ * @return {boolean} `true` if the value is an array, `false` otherwise.
  */
-function isArray(thing: any): boolean {
-  return Object.prototype.toString.call(thing) === '[object Array]';
+function isArray(value: unknown): value is unknown[] {
+  return Array.isArray(value);
 }
 
 /**
- * Check if the value is numeric.
- * @param {any} thing
- * @return {boolean}
+ * Checks whether the given value is numeric (can be parsed as a finite number).
+ * @param {unknown} value - The value to check.
+ * @return {boolean} `true` if the value is numeric, `false` otherwise.
  */
-function isNumeric(thing: any): boolean {
-  return !isNaN(parseFloat(thing)) && isFinite(thing);
+function isNumeric(value: unknown): boolean {
+  return !isNaN(parseFloat(value as string)) && isFinite(value as number);
 }
 
 export {isFunction, isString, isUndefined, isDefined, isObject, isArray, isNumeric}

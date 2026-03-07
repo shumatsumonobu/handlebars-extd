@@ -1,11 +1,15 @@
 /**
- * Set the CSS classes if the condition is true.
- * @param {boolean} expression Condition to be checked.
- * @param {string} clazz CSS class to set if the condition is true.
- * @return {string}
+ * Returns the specified CSS class name if the condition is truthy, otherwise returns an empty string.
+ * Useful for conditionally applying CSS classes in templates.
+ * @param {boolean} expression - The condition to evaluate.
+ * @param {string} className - The CSS class name to return if the condition is truthy.
+ * @return {string} The class name if truthy, `""` otherwise.
  * @example
- * // results in: foo
- * hbs.compile("{{classIf expression 'foo'}}")({"expression":true});
+ * // results in: <div class="active">
+ * hbs.compile('<div class="{{classIf isActive \'active\'}}">')({isActive: true});
+ *
+ * // results in: <div class="">
+ * hbs.compile('<div class="{{classIf isActive \'active\'}}">')({isActive: false});
  */
-declare const _default: (expression: boolean, clazz: string) => string;
+declare const _default: (expression: boolean, className: string) => string;
 export default _default;

@@ -1,15 +1,20 @@
 /**
- * Helper to imitate the ternary '?:' conditional operator.
- * @param {boolean} condition Satisfying condition for getting first value. Either true of false. (Required).
- * @param {any} val1 Value to return when the condition holds true.
- * @param {any} val2 Value to return when the condition is false (Optional).
- * @return {any}
+ * Ternary conditional helper, similar to the `?:` operator.
+ * Returns `trueValue` if the condition is truthy, otherwise returns `falseValue`.
+ * If `falseValue` is omitted, an empty string is returned when the condition is falsy.
+ * @param {boolean} condition - The condition to evaluate.
+ * @param {any} trueValue - The value to return when the condition is truthy.
+ * @param {any} falseValue - The value to return when the condition is falsy (optional, defaults to `""`).
+ * @return {any} `trueValue` if condition is truthy, `falseValue` otherwise.
  * @example
- * // results in: foo
- * hbs.compile("{{ifx true a b}}")({"a":"foo","b":"bar"});
+ * // results in: Yes
+ * hbs.compile("{{ifx true a b}}")({"a": "Yes", "b": "No"});
  *
- * // results in: bar
- * hbs.compile("{{ifx false a b}}")({"a":"foo","b":"bar"});
+ * // results in: No
+ * hbs.compile("{{ifx false a b}}")({"a": "Yes", "b": "No"});
+ *
+ * // results in: (empty string, falseValue omitted)
+ * hbs.compile("{{ifx false a}}")({"a": "Yes"});
  */
-declare const _default: (condition: boolean, val1: any, val2: any) => any;
+declare const _default: (condition: boolean, trueValue: any, falseValue: any) => any;
 export default _default;
